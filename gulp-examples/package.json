@@ -7,8 +7,11 @@
     "start": "gulp"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "gulp": "^4.0.0",
-    "gulp-concat": "^2.6.1"
+    "gulp-concat": "^2.6.1",
+    "jquery": "^3.3.1",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "del": "^3.0.0"
