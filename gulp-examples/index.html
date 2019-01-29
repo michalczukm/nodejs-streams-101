@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Users lists app</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- don't try this at home -->
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/toastr/build/toastr.css">
+
+    <style>
+        .users-list__button {
+            margin-bottom: 15px;
+        }
+
+        .users-list__button__elements {
+            display: inline-block;
+        }
+
+        .username:disabled {
+            background: lightgrey;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="page-header">
+                <h1 style="display: inline-block">
+                    <img src="assets/logo.png" style="width: 65px;"> Users lists app</h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <h2>Users</h2>
+                <div class="list-group side__list">
+                    <div id="users-list"></div>
+
+                    <hr/>
+
+                    <h3>Add new user</h3>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input id="username">
+                        <button type="button" id="add-user-button" class="btn btn-success">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- don't try this at home -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/toastr/build/toastr.min.js"></script>
+    <script src="dist/main.js"></script>
+</body>
+
+</html>
