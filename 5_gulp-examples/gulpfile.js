@@ -43,7 +43,7 @@ exports.default = series(clean, bundle);
 
 
 
-const reportProgress = new Transform({
+const reportProgress = new PassThrough({
     objectMode: true,
     transform(chunk, encoding, callback) {
       process.stdout.write('.');
