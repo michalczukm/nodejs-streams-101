@@ -7,6 +7,10 @@ inStream.push('first chunk\n');
 inStream.push('sedond chunk\n');
 inStream.push(null);
 
-setTimeout(() => {
-    inStream.pipe(process.stdout);
-}, 2000);
+
+inStream.pipe(process.stdout);
+inStream.pipe(process.stdout);
+
+inStream.unpipe(process.stdout);
+
+inStream.pipe(process.stdout);

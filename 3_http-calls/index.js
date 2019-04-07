@@ -9,13 +9,6 @@ const port = process.env.PORT || 3010;
 
 let chunksNo = 0;
 
-const sign = new Transform({
-    transform(chunk, encoding, callback) {
-        console.log('=== chunk no.:', ++chunksNo);
-
-        callback(null, chunk);
-    }
-});
 
 app.get('/', async (req, res) => {
     const responseStream = await axios({
@@ -24,7 +17,34 @@ app.get('/', async (req, res) => {
         responseType: 'stream'
     });
 
+    // sign ----------> lower in file
     responseStream.data.pipe(sign).pipe(res);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const sign = new Transform({
+    objectMode: true,
+    transform(chunk, encoding, callback) {
+        console.log(chunk.toString());
+        console.log('=== chunk no.:', ++chunksNo);
+
+        callback(null, chunk);
+    }
+});

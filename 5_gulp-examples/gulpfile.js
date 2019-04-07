@@ -8,6 +8,41 @@ const concat = require('gulp-concat');
 const del = require('del');
 const { Transform, PassThrough } = require('stream');
 
+function clean() {
+    return del('dist');
+}
+
+function bundle() {
+    return src('src/*.js')
+        .pipe(wc)
+        .pipe(reportProgress)
+        .pipe(sleep(2000))
+        .pipe(concat('main.js'))
+        .pipe(dest('dist'))
+};
+
+exports.default = series(clean, bundle);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .pipe(reportProgress)
+// .pipe(sleep(5000))
+// .pipe(wc)
+
+
+
+
 const reportProgress = new Transform({
     objectMode: true,
     transform(chunk, encoding, callback) {
@@ -38,18 +73,3 @@ const sleep = (ms) => new PassThrough({
         setTimeout(() => callback(null, chunk), ms);
     }
 })
-
-function clean() {
-    return del('dist');
-}
-
-function bundle() {
-    return src('src/*.js')
-        .pipe(reportProgress)
-        .pipe(sleep(5000))
-        .pipe(wc)
-        .pipe(concat('main.js'))
-        .pipe(dest('dist'))
-};
-
-exports.default = series(clean, bundle);
