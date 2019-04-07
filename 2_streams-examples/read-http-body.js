@@ -8,12 +8,12 @@ const server = http.createServer((req, res) => {
   req.on('data', (chunk) => {
     body += chunk;
   });
-
+  
   req.on('end', () => {
     try {
       const data = JSON.parse(body);
       res.write(typeof data);
-      res.end();
+      res.end(JSON.stringify(data));
     } catch (er) {
       res.statusCode = 400;
       return res.end(`error: ${er.message}`);
@@ -21,4 +21,4 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(1337);
+server.listen(8000);

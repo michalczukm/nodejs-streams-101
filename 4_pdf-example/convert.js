@@ -1,3 +1,4 @@
+const { Readable } = require('stream');
 const puppeteer = require('puppeteer');
 
 // check full options list at https://github.com/GoogleChrome/puppeteer/blob/v1.8.0/docs/api.md#pagepdfoptions
@@ -18,7 +19,10 @@ const convertHTMLToPDF = async (html, options = {}) => {
     await page.setContent(html);
 
     try {
-        return await page.pdf({...defaultOptions, options});
+        const stream = new Readable();
+        stream.push(await page.pdf({...defaultOptions, options}));
+        stream.push(null);
+        return stream;
     } catch (error) {
         console.log(error);
         throw new Error('PDF generation failed!');

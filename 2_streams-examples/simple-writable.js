@@ -7,3 +7,18 @@ const outStream = new Writable({
 });
 
 process.stdin.pipe(outStream);
+
+
+
+
+
+
+
+
+
+
+// outStream.write('hello!');
+
+
+
+// outStream.end('just like `res.end(...)` in http.ServerResponse!');

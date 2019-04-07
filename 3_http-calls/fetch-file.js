@@ -2,9 +2,32 @@ const fs = require('fs')
 const path = require('path')  
 const axios = require('axios')
 
-async function downloadImage () {  
-  const url = 'https://unsplash.com/photos/z6wdpf9fpM4/download?force=true';
-  const filePath = path.resolve(__dirname, 'images', 'code.jpg');
+
+
+
+
+
+const url = 'https://unsplash.com/photos/z6wdpf9fpM4/download?force=true';
+const filePath = path.resolve(__dirname, 'images', 'code.jpg');
+
+downloadImage(url, filePath)
+  .then(() => console.log('done!'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function downloadImage (url, filePath) {  
   const writer = fs.createWriteStream(filePath);
 
   const response = await axios({
@@ -20,5 +43,3 @@ async function downloadImage () {
     writer.on('error', reject)
   });
 }
-
-downloadImage();

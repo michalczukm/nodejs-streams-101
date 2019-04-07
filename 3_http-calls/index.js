@@ -5,10 +5,7 @@ const { Transform } = require('stream');
 const app = express();
 app.use(express.json());
 
-const port = process.env.PORT || 3010;
-
-let chunksNo = 0;
-
+const port = process.env.PORT || 8000;
 
 app.get('/', async (req, res) => {
     const responseStream = await axios({
@@ -17,8 +14,9 @@ app.get('/', async (req, res) => {
         responseType: 'stream'
     });
 
-    // sign ----------> lower in file
-    responseStream.data.pipe(sign).pipe(res);
+    // log ----------> lower in file
+    res.type('json');
+    responseStream.data.pipe(log()).pipe(res);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
@@ -39,12 +37,16 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
 
-const sign = new Transform({
-    objectMode: true,
-    transform(chunk, encoding, callback) {
-        console.log(chunk.toString());
-        console.log('=== chunk no.:', ++chunksNo);
+const log = () => {
+    let chunksNo = 0;
 
-        callback(null, chunk);
-    }
-});
+    return new Transform({
+        objectMode: true,
+        transform(chunk, encoding, callback) {
+            console.log(chunk.toString());
+            console.log('=== chunk no.:', ++chunksNo);
+    
+            callback(null, chunk);
+        }
+    });
+}    
