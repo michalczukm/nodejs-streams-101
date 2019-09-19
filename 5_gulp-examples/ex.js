@@ -42,7 +42,9 @@ const duplexStream = new Duplex({
 
 
 fs.readdirSync(dir)
-    .filter(filePath => filePath.match(new RegExp(`${extension}$`, 'i')))
+    .filter(filePath => 
+        filePath.match(new RegExp(`${extension}$`, 'i'))
+    )
     .map(filePath => path.join(dir, filePath))
     //['src/index.js', 'src/users.js']
 

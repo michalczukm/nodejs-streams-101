@@ -14,11 +14,12 @@ function clean() {
 
 function bundle() {
     return src('src/*.js')
-        .pipe(wc)
+        // .pipe(wc)
         .pipe(reportProgress)
-        .pipe(sleep(2000))
+        // .pipe(sleep(2000))
         .pipe(concat('main.js'))
         .pipe(dest('dist'))
+        .on('end', () => console.log('bundling finished!'));
 };
 
 exports.default = series(clean, bundle);
@@ -51,6 +52,11 @@ const reportProgress = new PassThrough({
     }
   });
 
+
+
+
+
+
 const wc = (() => {
     const countLines = (text) => ((text || '').match(/$/mg) || []).length - 1;
     const countWords = (text) => (text || '').split(/\W+/).length - 1;
@@ -65,6 +71,16 @@ const wc = (() => {
         }
     });
 })();
+
+
+
+
+
+
+
+
+
+
 
 const sleep = (ms) => new PassThrough({
     objectMode: true,
