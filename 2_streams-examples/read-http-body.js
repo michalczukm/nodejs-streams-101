@@ -21,4 +21,5 @@ const server = http.createServer((req, res) => {
   });
 });
 
+console.log('=== read-http-body.js, listening on port 8000');
 server.listen(8000);

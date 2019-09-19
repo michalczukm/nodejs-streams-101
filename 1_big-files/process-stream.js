@@ -8,3 +8,4 @@ server.on('request', (req, res) => {
 });
 
 server.listen(8000);
+console.log('=== process-stream.js, listening on port 8000');
