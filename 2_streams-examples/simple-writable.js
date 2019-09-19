@@ -17,8 +17,10 @@ process.stdin.pipe(outStream);
 
 
 
-// outStream.write('hello!');
+outStream.write('hello!');
 
 
 
-// outStream.end('just like `res.end(...)` in http.ServerResponse!');
+// setTimeout(() => {
+//   outStream.end('just like `res.end(...)` in http.ServerResponse!');
+// }, 5000);

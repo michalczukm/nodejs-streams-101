@@ -1,4 +1,4 @@
-const { Transform, PassThrough } = require('stream');
+const { Transform } = require('stream');
 
 function wc() {
     const countLines = (text) => ((text || '').match(/$/mg) || []).length - 1;

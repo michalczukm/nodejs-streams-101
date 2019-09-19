@@ -1,6 +1,7 @@
 const { Duplex } = require('stream');
+const fs = require('fs');
 
-const inoutStream = new Duplex({
+const inOutStream = new Duplex({
   write(chunk, encoding, callback) {
     console.log(chunk.toString().toUpperCase());
     callback();
@@ -10,8 +11,11 @@ const inoutStream = new Duplex({
   }
 });
 
-inoutStream.push('first chunk\n');
-inoutStream.push('second chunk\n');
-inoutStream.push(null);
+// only those are read by last write stream
+inOutStream.push('readable stream: first chunk\n');
+inOutStream.push('readable stream: second chunk\n');
+inOutStream.push(null);
 
-process.stdin.pipe(inoutStream).pipe(process.stdout);
+
+const writeToFile =  fs.createWriteStream('./dist/simple-duplex');
+process.stdin.pipe(inOutStream).pipe(writeToFile);
