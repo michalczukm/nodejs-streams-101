@@ -8,9 +8,9 @@ const port = process.env.PORT || 8000;
 const handleErrors = (error, res) => res.status(500).send(error.message || error);
 
 app.post('/', bodyParser.text({type: '*/*' }), async (req, res) => {
-    const pdfBuffer = await converter(req.body);
+    const pdfStream = await converter(req.body);
 
-    pdfBuffer.pipe(res)
+    pdfStream.pipe(res)
         .type('application/pdf')
         .on('error', error => handleErrors(error, res));
 });
